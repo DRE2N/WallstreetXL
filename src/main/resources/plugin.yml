@@ -1,0 +1,11 @@
+name: WallstreetXL
+main: io.github.dre2n.wallstreetxl.WallstreetXL
+version: ${project.version}${buildNo}
+author: Daniel Saukel
+description: ${project.description}
+website: ${project.url}
+depend: [Vault, Craftconomy3]
+commands:
+  wallstreetxl:
+    description: Reference command for WallstreetXL.
+    aliases: [wxl,ws,wallstreet]
