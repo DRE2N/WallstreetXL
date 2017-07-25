@@ -49,7 +49,7 @@ public class AddItemCommand extends DRECommand {
     public void onExecute(String[] args, CommandSender sender) {
         RandomShop shop = plugin.getShopCache().getByName(args[1]);
         if (shop == null) {
-            MessageUtil.sendMessage(sender, WMessage.ERROR_NO_SUCH_SHOP.getMessage());
+            MessageUtil.sendMessage(sender, WMessage.ERROR_NO_SUCH_SHOP.getMessage(args[1]));
             return;
         }
         ItemStack item = ((Player) sender).getInventory().getItemInMainHand();
@@ -60,7 +60,7 @@ public class AddItemCommand extends DRECommand {
         boolean buy = !args[2].equalsIgnoreCase("sell");
         WCurrency currency = plugin.getCurrencyCache().getByName(args[3]);
         if (currency == null) {
-            MessageUtil.sendMessage(sender, WMessage.ERROR_NO_SUCH_CURRENCY.getMessage());
+            MessageUtil.sendMessage(sender, WMessage.ERROR_NO_SUCH_CURRENCY.getMessage(args[3]));
             return;
         }
         double price = NumberUtil.parseDouble(args[4]);
