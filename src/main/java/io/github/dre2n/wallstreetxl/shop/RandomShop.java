@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -44,7 +45,7 @@ public class RandomShop {
         this.file = file;
         config = YamlConfiguration.loadConfiguration(file);
         name = file.getName().replace(YAML, new String());
-        title = config.getString("title");
+        title = ChatColor.translateAlternateColorCodes('&', config.getString("title"));
         items = ShopItem.deserializeList((List<Map<String, Object>>) config.getList("items"));
         gui = new PageGUI(title);
         items.forEach(i -> gui.addButton(i.getButton()));
@@ -61,7 +62,7 @@ public class RandomShop {
         }
         config = YamlConfiguration.loadConfiguration(file);
         this.name = name;
-        this.title = title;
+        this.title = ChatColor.translateAlternateColorCodes('&', title);
         gui = new PageGUI(title);
         save();
     }
