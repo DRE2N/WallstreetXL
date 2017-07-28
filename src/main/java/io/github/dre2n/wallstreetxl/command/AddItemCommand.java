@@ -24,6 +24,7 @@ import io.github.dre2n.wallstreetxl.config.WMessage;
 import io.github.dre2n.wallstreetxl.currency.WCurrency;
 import io.github.dre2n.wallstreetxl.shop.RandomShop;
 import io.github.dre2n.wallstreetxl.shop.ShopItem;
+import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -53,7 +54,7 @@ public class AddItemCommand extends DRECommand {
             return;
         }
         ItemStack item = ((Player) sender).getInventory().getItemInMainHand();
-        if (item == null) {
+        if (item == null || item.getType() == Material.AIR) {
             MessageUtil.sendMessage(sender, WMessage.ERROR_NO_ITEM_IN_HAND.getMessage());
             return;
         }
