@@ -74,6 +74,10 @@ public class WallstreetXL extends DREPlugin {
     public void onEnable() {
         super.onEnable();
         instance = this;
+        loadCore();
+    }
+
+    public void loadCore() {
         loadCraftConomy();
         loadWConfig();
         loadMessageConfig();
