@@ -70,6 +70,7 @@ public class ShopItem implements ConfigurationSerializable {
     public ItemStack getButton() {
         ItemStack button = item.clone();
         ItemMeta meta = button.getItemMeta();
+        assert meta != null : "Meta is null";
         List<String> lore = null;
         if (meta.hasLore()) {
             lore = meta.getLore();
@@ -77,8 +78,7 @@ public class ShopItem implements ConfigurationSerializable {
             lore = new ArrayList<>();
         }
         ChatColor color = (buy ? ChatColor.DARK_RED : ChatColor.GREEN);
-        lore.add(color + WMessage.SHOP_BUY.getMessage());
-        lore.add(color + WMessage.SHOP_SELL.getMessage());
+        lore.add(color + (buy ? WMessage.SHOP_BUY : WMessage.SHOP_SELL).getMessage());
         lore.add(color + format(currency, price));
         meta.setLore(lore);
         button.setItemMeta(meta);
