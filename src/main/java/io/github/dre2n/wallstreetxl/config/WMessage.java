@@ -46,19 +46,22 @@ public enum WMessage implements Message {
     ERROR_NOT_ENOUGH("error.notEnough", "&4You do not have &7&v1&4."),
     ERROR_SHOP_EXISTS("error.shopExists", "&4The shop &7&v1 &4already exists."),
     HELP_ADD_ITEM("help.addItem", "/ws addItem [shop] [buy|sell] [currency] [price] - Adds the good in your hand to the shop"),
-    HELP_CREATE("help.create", "/ws create [name] ([title])- Creates a new shop"),
+    HELP_CREATE("help.create", "/ws create ([-a(dmin)]) [name] ([title])- Creates a new player or admin shop"),
     HELP_EXCHANGE("help.exchange", "/ws exchange [amount] [old currency] [new currency]"),
     HELP_HELP("help.help", "/ws help [page] - Shows the help page"),
+    HELP_LINK("help.link", "/ws link [name] - Creates a trader for a existing shop"),
     HELP_MAIN("help.main", "/ws - General status information"),
     HELP_OPEN("help.open", "/ws open [Name] - Opens a shop"),
     HELP_RELOAD("help.reload", "/ws reload - Reloads the config and all shops"),
     HELP_REMOVE_ITEM("help.removeItem", "/ws remove [shop] [index] - Removes a good from the shop"),
+    HELP_TRADER("help.trader", "/ws trader [name] ([title])- Creates a new player shop with a trader"),
     SHOP_BOUGHT("shop.bought", "&7You bought &4&v1 &7for &4&v2&7."),
     SHOP_BUY("shop.buy", "&4Click to buy"),
     SHOP_SELL("shop.sell", "&aClick to sell"),
     SHOP_SOLD("shop.sold", "&7You sold &4&v1 &7for &4&v2&7."),
     NEXT_PAGE("nextPage", "&6&lNEXT PAGE"),
-    PREVIOUS_PAGE("previousPage", "&6&lPREVIOUS PAGE"),;
+    PREVIOUS_PAGE("previousPage", "&6&lPREVIOUS PAGE"),
+    TRADER_NAME("trader.name", "&1&l[Trader] &6&v1");
 
     private String identifier;
     private String message;

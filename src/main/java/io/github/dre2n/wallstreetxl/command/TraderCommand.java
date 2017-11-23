@@ -20,26 +20,28 @@ import io.github.dre2n.commons.chat.MessageUtil;
 import io.github.dre2n.commons.command.DRECommand;
 import io.github.dre2n.wallstreetxl.WallstreetXL;
 import io.github.dre2n.wallstreetxl.config.WMessage;
-import io.github.dre2n.wallstreetxl.shop.AdminShop;
+import io.github.dre2n.wallstreetxl.shop.PlayerShop;
 import io.github.dre2n.wallstreetxl.shop.Shop;
 import io.github.dre2n.wallstreetxl.shop.ShopCache;
+import io.github.dre2n.wallstreetxl.shop.Trader;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 /**
  * @author Daniel Saukel
  */
-public class CreateCommand extends DRECommand {
+public class TraderCommand extends DRECommand {
 
     ShopCache shops = WallstreetXL.getInstance().getShopCache();
 
-    public CreateCommand() {
-        setCommand("create");
-        setAliases("c");
+    public TraderCommand() {
+        setCommand("trader");
+        setAliases("t");
         setMinArgs(-1);
         setMaxArgs(-1);
-        setHelp(WMessage.HELP_CREATE.getMessage());
-        setPermission("wxl.create");
-        setConsoleCommand(true);
+        setHelp(WMessage.HELP_TRADER.getMessage());
+        setPermission("wxl.trader");
+        setConsoleCommand(false);
         setPlayerCommand(true);
     }
 
@@ -62,8 +64,9 @@ public class CreateCommand extends DRECommand {
                 title += arg;
             }
         }
-        Shop shop = new AdminShop(args[1], title);
+        Shop shop = new PlayerShop(args[1], (Player) sender, title);
         shops.getShops().add(shop);
+        Trader.createTrader((Player) sender, args[1]);
         MessageUtil.sendMessage(sender, WMessage.CMD_CREATE_SUCCESS.getMessage(args[1]));
     }
 

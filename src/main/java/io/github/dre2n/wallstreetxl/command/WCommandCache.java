@@ -28,9 +28,11 @@ public class WCommandCache extends DRECommandCache {
     public CreateCommand create = new CreateCommand();
     public ExchangeCommand exchange = new ExchangeCommand();
     public HelpCommand help = new HelpCommand();
+    public LinkCommand link = new LinkCommand();
     public MainCommand main = new MainCommand();
     public OpenCommand open = new OpenCommand();
     public RemoveItemCommand removeItem = new RemoveItemCommand();
+    public TraderCommand trader = new TraderCommand();
 
     public WCommandCache(DREPlugin plugin) {
         super("wallstreetxl", plugin);
@@ -38,9 +40,11 @@ public class WCommandCache extends DRECommandCache {
         addCommand(create);
         addCommand(exchange);
         addCommand(help);
+        addCommand(link);
         addCommand(main);
         addCommand(open);
         addCommand(removeItem);
+        addCommand(trader);
     }
 
 }

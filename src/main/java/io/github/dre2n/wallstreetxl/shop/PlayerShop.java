@@ -23,17 +23,20 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 
 /**
  * @author Daniel Saukel
  */
-public class RandomShop {
+public class PlayerShop implements Shop {
 
     public static final String YAML = ".yml";
 
+    private UUID owner;
     private String name;
     private File file;
     private FileConfiguration config;
@@ -41,9 +44,10 @@ public class RandomShop {
     private List<ShopItem> items = new ArrayList<>();
     private PageGUI gui;
 
-    public RandomShop(File file) {
+    public PlayerShop(File file) {
         this.file = file;
         config = YamlConfiguration.loadConfiguration(file);
+        owner = UUID.fromString(config.getString("owner"));
         name = file.getName().replace(YAML, new String());
         title = ChatColor.translateAlternateColorCodes('&', config.getString("title"));
         items = ShopItem.deserializeList((List<Map<String, Object>>) config.getList("items"));
@@ -51,8 +55,8 @@ public class RandomShop {
         items.forEach(i -> gui.addButton(i.getButton()));
     }
 
-    public RandomShop(String name, String title) {
-        file = new File(WallstreetXL.SHOPS, name + YAML);
+    public PlayerShop(String name, Player owner, String title) {
+        file = new File(WallstreetXL.PLAYER_SHOPS, name + YAML);
         if (!file.exists()) {
             try {
                 file.createNewFile();
@@ -61,45 +65,63 @@ public class RandomShop {
             }
         }
         config = YamlConfiguration.loadConfiguration(file);
+        this.owner = owner.getUniqueId();
         this.name = name;
         this.title = ChatColor.translateAlternateColorCodes('&', title);
-        gui = new PageGUI(title);
+        gui = new PageGUI(this.title);
         save();
     }
 
     /* Getters and setters */
+    public UUID getOwner() {
+        return owner;
+    }
+
+    @Override
     public String getName() {
         return name;
     }
 
+    @Override
     public String getTitle() {
         return title;
     }
 
+    @Override
     public void setTitle(String title) {
         this.title = title;
     }
 
+    @Override
     public List<ShopItem> getItems() {
         return items;
     }
 
+    @Override
     public void addItem(ShopItem item) {
         items.add(item);
         gui.addButton(item.getButton());
     }
 
+    @Override
     public void removeItem(ShopItem item) {
         items.remove(item);
         gui.clear();
         items.forEach(i -> gui.addButton(i.getButton()));
     }
 
+    @Override
     public PageGUI getGUI() {
         return gui;
     }
 
     /* Persistence */
+    @Override
+    public void delete() {
+        WallstreetXL.getInstance().getShopCache().getShops().remove(this);
+    }
+
+    @Override
     public void save() {
         serialize();
         try {
@@ -109,7 +131,9 @@ public class RandomShop {
         }
     }
 
+    @Override
     public void serialize() {
+        config.set("owner", owner.toString());
         config.set("title", title);
         config.set("items", ShopItem.serializeList(items));
     }

@@ -26,7 +26,8 @@ import io.github.dre2n.wallstreetxl.command.WCommandCache;
 import io.github.dre2n.wallstreetxl.config.WConfig;
 import io.github.dre2n.wallstreetxl.config.WMessage;
 import io.github.dre2n.wallstreetxl.currency.WCurrencyCache;
-import io.github.dre2n.wallstreetxl.shop.RandomShopCache;
+import io.github.dre2n.wallstreetxl.shop.ShopCache;
+import io.github.dre2n.wallstreetxl.shop.Trader;
 import io.github.dre2n.wallstreetxl.util.PageGUICache;
 import java.io.File;
 import java.io.IOException;
@@ -41,14 +42,15 @@ public class WallstreetXL extends DREPlugin {
     private Common cc3;
 
     public static File CURRENCIES;
-    public static File SHOPS;
+    public static File ADMIN_SHOPS;
+    public static File PLAYER_SHOPS;
 
     private WConfig wConfig;
     private MessageConfig messageConfig;
     private PageGUICache pageGUIs;
     private WCommandCache wCommands;
     private WCurrencyCache wCurrencies;
-    private RandomShopCache shops;
+    private ShopCache shops;
 
     public WallstreetXL() {
         /*
@@ -67,7 +69,8 @@ public class WallstreetXL extends DREPlugin {
 
         settings = new DREPluginSettings(false, false, true, false, false, Internals.INDEPENDENT);
         CURRENCIES = new File(getDataFolder(), "currencies.yml");
-        SHOPS = new File(getDataFolder(), "shops");
+        ADMIN_SHOPS = new File(getDataFolder(), "adminShops");
+        PLAYER_SHOPS = new File(getDataFolder(), "playerShops");
     }
 
     @Override
@@ -85,6 +88,7 @@ public class WallstreetXL extends DREPlugin {
         loadCurrencies();
         loadShops();
         loadWCommands();
+        manager.registerEvents(new Trader(), this);
     }
 
     public static WallstreetXL getInstance() {
@@ -152,15 +156,14 @@ public class WallstreetXL extends DREPlugin {
         wCurrencies = new WCurrencyCache(CURRENCIES);
     }
 
-    public RandomShopCache getShopCache() {
+    public ShopCache getShopCache() {
         return shops;
     }
 
     public void loadShops() {
-        if (!SHOPS.exists()) {
-            SHOPS.mkdir();
-        }
-        shops = new RandomShopCache(SHOPS);
+        ADMIN_SHOPS.mkdir();
+        PLAYER_SHOPS.mkdir();
+        shops = new ShopCache(ADMIN_SHOPS, PLAYER_SHOPS);
     }
 
 }

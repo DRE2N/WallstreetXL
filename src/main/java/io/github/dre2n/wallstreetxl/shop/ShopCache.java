@@ -33,21 +33,22 @@ import org.bukkit.inventory.ItemStack;
 /**
  * @author Daniel Saukel
  */
-public class RandomShopCache implements Listener {
+public class ShopCache implements Listener {
 
-    private Set<RandomShop> shops = new HashSet<>();
+    private Set<Shop> shops = new HashSet<>();
 
-    public RandomShopCache(File folder) {
+    public ShopCache(File adminShops, File playerShops) {
         Bukkit.getPluginManager().registerEvents(this, WallstreetXL.getInstance());
-        FileUtil.getFilesForFolder(folder).forEach(f -> shops.add(new RandomShop(f)));
+        FileUtil.getFilesForFolder(adminShops).forEach(f -> shops.add(new AdminShop(f)));
+        FileUtil.getFilesForFolder(playerShops).forEach(f -> shops.add(new PlayerShop(f)));
     }
 
-    public Set<RandomShop> getRandomShops() {
+    public Set<Shop> getShops() {
         return shops;
     }
 
-    public RandomShop getByName(String name) {
-        for (RandomShop shop : shops) {
+    public Shop getByName(String name) {
+        for (Shop shop : shops) {
             if (shop.getName().equalsIgnoreCase(name)) {
                 return shop;
             }
@@ -55,8 +56,8 @@ public class RandomShopCache implements Listener {
         return null;
     }
 
-    public RandomShop getByInventory(Inventory inventory) {
-        for (RandomShop shop : shops) {
+    public Shop getByInventory(Inventory inventory) {
+        for (Shop shop : shops) {
             if (shop.getGUI().getPages().contains(inventory)) {
                 return shop;
             }
@@ -74,7 +75,7 @@ public class RandomShopCache implements Listener {
         if (inventory == null) {
             return;
         }
-        RandomShop shop = getByInventory(inventory);
+        Shop shop = getByInventory(inventory);
         if (shop == null) {
             return;
         }
@@ -93,7 +94,11 @@ public class RandomShopCache implements Listener {
         if (item == null) {
             return;
         }
-        item.deal(player);
+        boolean deal = item.deal(player);
+        if (deal && shop instanceof PlayerShop) {
+            shop.removeItem(item);
+            shop.getGUI().open(player);
+        }
     }
 
 }

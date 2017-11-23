@@ -22,7 +22,7 @@ import io.github.dre2n.commons.misc.NumberUtil;
 import io.github.dre2n.wallstreetxl.WallstreetXL;
 import io.github.dre2n.wallstreetxl.config.WMessage;
 import io.github.dre2n.wallstreetxl.currency.WCurrency;
-import io.github.dre2n.wallstreetxl.shop.RandomShop;
+import io.github.dre2n.wallstreetxl.shop.Shop;
 import io.github.dre2n.wallstreetxl.shop.ShopItem;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
@@ -48,7 +48,7 @@ public class AddItemCommand extends DRECommand {
 
     @Override
     public void onExecute(String[] args, CommandSender sender) {
-        RandomShop shop = plugin.getShopCache().getByName(args[1]);
+        Shop shop = plugin.getShopCache().getByName(args[1]);
         if (shop == null) {
             MessageUtil.sendMessage(sender, WMessage.ERROR_NO_SUCH_SHOP.getMessage(args[1]));
             return;

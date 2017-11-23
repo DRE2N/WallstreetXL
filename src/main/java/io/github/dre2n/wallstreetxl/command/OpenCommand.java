@@ -20,7 +20,7 @@ import io.github.dre2n.commons.chat.MessageUtil;
 import io.github.dre2n.commons.command.DRECommand;
 import io.github.dre2n.wallstreetxl.WallstreetXL;
 import io.github.dre2n.wallstreetxl.config.WMessage;
-import io.github.dre2n.wallstreetxl.shop.RandomShop;
+import io.github.dre2n.wallstreetxl.shop.Shop;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -44,7 +44,7 @@ public class OpenCommand extends DRECommand {
     @Override
     public void onExecute(String[] args, CommandSender sender) {
         Player player = (Player) sender;
-        RandomShop shop = plugin.getShopCache().getByName(args[1]);
+        Shop shop = plugin.getShopCache().getByName(args[1]);
         if (shop == null) {
             MessageUtil.sendMessage(sender, WMessage.ERROR_NO_SUCH_SHOP.getMessage(args[1]));
             return;
