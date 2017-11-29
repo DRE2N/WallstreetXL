@@ -51,7 +51,7 @@ public class LinkCommand extends DRECommand {
             MessageUtil.sendMessage(sender, WMessage.ERROR_NO_SUCH_SHOP.getMessage(args[1]));
             return;
         }
-        Trader.createTrader((Player) sender, args[1]);
+        shop.setVillager(Trader.createTrader((Player) sender, ((Player) sender).getLocation(), args[1]));
         MessageUtil.sendMessage(sender, WMessage.CMD_CREATE_SUCCESS.getMessage(args[1]));
     }
 

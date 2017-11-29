@@ -66,7 +66,6 @@ public class TraderCommand extends DRECommand {
         }
         Shop shop = new PlayerShop(args[1], (Player) sender, title);
         shops.getShops().add(shop);
-        Trader.createTrader((Player) sender, args[1]);
         MessageUtil.sendMessage(sender, WMessage.CMD_CREATE_SUCCESS.getMessage(args[1]));
     }
 

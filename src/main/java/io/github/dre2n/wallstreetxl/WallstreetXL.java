@@ -31,6 +31,9 @@ import io.github.dre2n.wallstreetxl.shop.Trader;
 import io.github.dre2n.wallstreetxl.util.PageGUICache;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
+import org.bukkit.entity.Villager;
 import org.bukkit.event.HandlerList;
 
 /**
@@ -51,6 +54,7 @@ public class WallstreetXL extends DREPlugin {
     private WCommandCache wCommands;
     private WCurrencyCache wCurrencies;
     private ShopCache shops;
+    private Set<Villager> traderCache = new HashSet<>();
 
     public WallstreetXL() {
         /*
@@ -78,6 +82,11 @@ public class WallstreetXL extends DREPlugin {
         super.onEnable();
         instance = this;
         loadCore();
+    }
+
+    @Override
+    public void onDisable() {
+        clearTraderCache();
     }
 
     public void loadCore() {
@@ -164,6 +173,17 @@ public class WallstreetXL extends DREPlugin {
         ADMIN_SHOPS.mkdir();
         PLAYER_SHOPS.mkdir();
         shops = new ShopCache(ADMIN_SHOPS, PLAYER_SHOPS);
+    }
+
+    public Set<Villager> getTraderCache() {
+        return traderCache;
+    }
+
+    public void clearTraderCache() {
+        for (Villager villager : traderCache) {
+            villager.remove();
+        }
+        traderCache.clear();
     }
 
 }

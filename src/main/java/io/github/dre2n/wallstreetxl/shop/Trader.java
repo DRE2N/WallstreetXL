@@ -19,9 +19,10 @@ package io.github.dre2n.wallstreetxl.shop;
 import io.github.dre2n.commons.chat.MessageUtil;
 import io.github.dre2n.wallstreetxl.WallstreetXL;
 import io.github.dre2n.wallstreetxl.config.WMessage;
+import org.bukkit.Location;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -34,14 +35,15 @@ import org.bukkit.metadata.FixedMetadataValue;
  */
 public class Trader implements Listener {
 
-    public static final String WXL_META = "WXL";
+    public static final String WXL_META = "WXL-Shop";
 
-    public static Villager createTrader(Player owner, String shopName) {
-        Villager villager = (Villager) owner.getWorld().spawnEntity(owner.getLocation(), EntityType.VILLAGER);
+    public static Villager createTrader(OfflinePlayer owner, Location location, String shopName) {
+        Villager villager = (Villager) location.getWorld().spawnEntity(location, EntityType.VILLAGER);
         villager.setProfession(Villager.Profession.NITWIT);
         villager.setAI(false);
         villager.setMetadata(WXL_META, new FixedMetadataValue(WallstreetXL.getInstance(), shopName));
-        villager.setCustomName(WMessage.TRADER_NAME.getMessage(owner.getName()));
+        villager.setCustomName(WMessage.TRADER_NAME.getMessage(owner != null ? owner.getName() : "Admin Shop"));
+        WallstreetXL.getInstance().getTraderCache().add(villager);
         return villager;
     }
 
@@ -86,6 +88,7 @@ public class Trader implements Listener {
         if (shop instanceof PlayerShop) {
             shop.delete();
         }
+        WallstreetXL.getInstance().getTraderCache().remove((Villager) villager);
     }
 
 }

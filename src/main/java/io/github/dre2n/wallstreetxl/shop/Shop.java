@@ -16,34 +16,93 @@
  */
 package io.github.dre2n.wallstreetxl.shop;
 
+import io.github.dre2n.wallstreetxl.WallstreetXL;
 import io.github.dre2n.wallstreetxl.util.PageGUI;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Villager;
 
 /**
  * @author Daniel Saukel
  */
-public interface Shop {
+public abstract class Shop {
+
+    public static final String YAML = ".yml";
+
+    protected File file;
+    protected FileConfiguration config;
+    protected String name;
+    protected String title;
+    protected List<ShopItem> items = new ArrayList<>();
+    protected Villager villager;
+    protected PageGUI gui;
 
     /* Getters and setters */
-    public String getName();
+    public String getName() {
+        return name;
+    }
 
-    public String getTitle();
+    public String getTitle() {
+        return title;
+    }
 
-    public void setTitle(String title);
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-    public List<ShopItem> getItems();
+    public List<ShopItem> getItems() {
+        return items;
+    }
 
-    public void addItem(ShopItem item);
+    public void addItem(ShopItem item) {
+        items.add(item);
+        gui.addButton(item.getButton());
+        save();
+    }
 
-    public void removeItem(ShopItem item);
+    public void removeItem(ShopItem item) {
+        items.remove(item);
+        gui.clear();
+        items.forEach(i -> gui.addButton(i.getButton()));
+        save();
+    }
 
-    public PageGUI getGUI();
+    public Villager getVillager() {
+        return villager;
+    }
+
+    public void setVillager(Villager villager) {
+        this.villager = villager;
+    }
+
+    public PageGUI getGUI() {
+        return gui;
+    }
 
     /* Persistence */
-    public void delete();
+    public void delete() {
+        WallstreetXL.getInstance().getShopCache().getShops().remove(this);
+        file.delete();
+    }
 
-    public void save();
+    public void save() {
+        serialize();
+        try {
+            config.save(file);
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        }
+    }
 
-    public void serialize();
+    public void serialize() {
+        config.set("title", title);
+        config.set("items", ShopItem.serializeList(items));
+        if (villager != null) {
+            config.set("traderLocation", villager.getLocation());
+        }
+    }
 
 }

@@ -34,50 +34,36 @@ import org.bukkit.inventory.ItemStack;
 /**
  * @author Daniel Saukel
  */
-public class AddItemCommand extends DRECommand {
+public class LogsCommand extends DRECommand {
 
     WallstreetXL plugin = WallstreetXL.getInstance();
 
-    public AddItemCommand() {
-        setCommand("addItem");
-        setAliases("add", "a");
-        setMinArgs(4);
-        setMaxArgs(4);
-        setHelp(WMessage.HELP_ADD_ITEM.getMessage());
-        setPermission("wxl.additem");
+    public LogsCommand() {
+        setCommand("logs");
+        setAliases("log", "l");
+        setMinArgs(1);
+        setMaxArgs(1);
+        setHelp(WMessage.HELP_LOGS.getMessage());
+        setPermission("wxl.logs");
         setConsoleCommand(true);
         setPlayerCommand(true);
     }
 
     @Override
     public void onExecute(String[] args, CommandSender sender) {
-        Shop shop = plugin.getShopCache().getByName(args[1]);
-        if (shop == null) {
+        Shop abstractShop = plugin.getShopCache().getByName(args[1]);
+        if (!(abstractShop instanceof PlayerShop)) {
             MessageUtil.sendMessage(sender, WMessage.ERROR_NO_SUCH_SHOP.getMessage(args[1]));
             return;
         }
-        if (!sender.hasPermission("wxl.additem.admin") && shop instanceof AdminShop
-                || (shop instanceof PlayerShop && !((PlayerShop) shop).getOwner().equals(((Player) sender).getUniqueId()))) {
+        PlayerShop shop = (PlayerShop) abstractShop;
+        if (!sender.hasPermission("wxl.logs.others") && !shop.getOwner().equals(((Player) sender).getUniqueId())) {
             MessageUtil.sendMessage(sender, WMessage.ERROR_NO_SUCH_SHOP.getMessage(args[1]));
             return;
         }
-        ItemStack item = ((Player) sender).getInventory().getItemInMainHand();
-        if (item == null || item.getType() == Material.AIR) {
-            MessageUtil.sendMessage(sender, WMessage.ERROR_NO_ITEM_IN_HAND.getMessage());
-            return;
+        for (String log : shop.readLog()) {
+            MessageUtil.sendMessage(sender, log);
         }
-        boolean buy = !args[2].equalsIgnoreCase("sell");
-        WCurrency currency = plugin.getCurrencyCache().getByName(args[3]);
-        if (currency == null) {
-            MessageUtil.sendMessage(sender, WMessage.ERROR_NO_SUCH_CURRENCY.getMessage(args[3]));
-            return;
-        }
-        double price = NumberUtil.parseDouble(args[4]);
-        shop.addItem(new ShopItem(item, currency, price, buy));
-        if (sender instanceof Player && shop instanceof PlayerShop) {
-            ((Player) sender).getInventory().removeItem(item);
-        }
-        MessageUtil.sendMessage(sender, WMessage.CMD_ADD_ITEM_SUCCESS.getMessage(ShopItem.getItemName(item), shop.getName()));
     }
 
 }

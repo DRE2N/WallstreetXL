@@ -41,6 +41,7 @@ public class ReloadCommand extends DRECommand {
 
     @Override
     public void onExecute(String[] args, CommandSender sender) {
+        plugin.clearTraderCache();
         plugin.loadCore();
         MessageUtil.sendPluginTag(sender, plugin);
         MessageUtil.sendCenteredMessage(sender, WMessage.CMD_RELOAD_SUCCESS.getMessage());

@@ -94,10 +94,18 @@ public class ShopCache implements Listener {
         if (item == null) {
             return;
         }
-        boolean deal = item.deal(player);
-        if (deal && shop instanceof PlayerShop) {
-            shop.removeItem(item);
-            shop.getGUI().open(player);
+        if (shop instanceof AdminShop) {
+            item.deal(player);
+        } else if (shop instanceof PlayerShop) {
+            if (item.deal(player, Bukkit.getOfflinePlayer(((PlayerShop) shop).getOwner()))) {
+                if (item.isBuy()) {
+                    shop.removeItem(item);
+                } else {
+                    shop.addItem(item);
+                }
+                shop.getGUI().open(player);
+                ((PlayerShop) shop).log(System.currentTimeMillis(), player, item.getItem(), (item.isBuy() ? 1 : -1) * item.getPrice() + item.getCurrency().getSign());
+            }
         }
     }
 

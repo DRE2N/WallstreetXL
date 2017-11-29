@@ -27,6 +27,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.bukkit.ChatColor;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -115,7 +116,7 @@ public class ShopItem implements ConfigurationSerializable {
                 MessageUtil.sendMessage(player, WMessage.SHOP_BOUGHT.getMessage(item.getAmount() + " " + getItemName(item), format(currency, price)));
                 return true;
             } else {
-                MessageUtil.sendMessage(player, WMessage.ERROR_NOT_ENOUGH.getMessage(format(currency, price)));
+                MessageUtil.sendMessage(player, WMessage.ERROR_NOT_ENOUGH.getMessage(player.getName(), format(currency, price)));
                 return false;
             }
         } else if (player.getInventory().containsAtLeast(item, item.getAmount())) {
@@ -124,7 +125,38 @@ public class ShopItem implements ConfigurationSerializable {
             MessageUtil.sendMessage(player, WMessage.SHOP_SOLD.getMessage(item.getAmount() + " " + getItemName(item), format(currency, price)));
             return true;
         } else {
-            MessageUtil.sendMessage(player, WMessage.ERROR_NOT_ENOUGH.getMessage(item.getAmount() + " " + getItemName(item)));
+            MessageUtil.sendMessage(player, WMessage.ERROR_NOT_ENOUGH.getMessage(player.getName(), item.getAmount() + " " + getItemName(item)));
+            return false;
+        }
+    }
+
+    public boolean deal(Player purchaser, OfflinePlayer optionee) {
+        Account pAccount = plugin.getCraftConomy().getAccountManager().getAccount(purchaser.getName(), false);
+        Account oAccount = plugin.getCraftConomy().getAccountManager().getAccount(optionee.getName(), false);
+        if (buy) {
+            if (pAccount.hasEnough(price, null, currency.getName())) {
+                purchaser.getInventory().addItem(item);
+                pAccount.withdraw(price, null, currency.getName(), Cause.BANK_WITHDRAW, new String());
+                oAccount.deposit(price, null, currency.getName(), Cause.BANK_DEPOSIT, new String());
+                MessageUtil.sendMessage(purchaser, WMessage.SHOP_BOUGHT.getMessage(item.getAmount() + " " + getItemName(item), format(currency, price)));
+                return true;
+            } else {
+                MessageUtil.sendMessage(purchaser, WMessage.ERROR_NOT_ENOUGH.getMessage(purchaser.getName(), format(currency, price)));
+                return false;
+            }
+        } else if (purchaser.getInventory().containsAtLeast(item, item.getAmount())) {
+            if (oAccount.hasEnough(price, null, currency.getName())) {
+                purchaser.getInventory().removeItem(new ItemStack[]{item});
+                pAccount.deposit(price, null, currency.getName(), Cause.BANK_DEPOSIT, new String());
+                oAccount.withdraw(price, null, currency.getName(), Cause.BANK_WITHDRAW, new String());
+                MessageUtil.sendMessage(purchaser, WMessage.SHOP_SOLD.getMessage(item.getAmount() + " " + getItemName(item), format(currency, price)));
+                return true;
+            } else {
+                MessageUtil.sendMessage(purchaser, WMessage.ERROR_NOT_ENOUGH.getMessage(optionee.getName(), format(currency, price)));
+                return false;
+            }
+        } else {
+            MessageUtil.sendMessage(purchaser, WMessage.ERROR_NOT_ENOUGH.getMessage(purchaser.getName(), item.getAmount() + " " + getItemName(item)));
             return false;
         }
     }
@@ -157,7 +189,7 @@ public class ShopItem implements ConfigurationSerializable {
         if (item.hasItemMeta() && item.getItemMeta().hasDisplayName()) {
             return item.getItemMeta().getDisplayName();
         } else {
-            return item.getType().toString().toLowerCase();
+            return item.getType().toString().toLowerCase().replace('_', ' ');
         }
     }
 

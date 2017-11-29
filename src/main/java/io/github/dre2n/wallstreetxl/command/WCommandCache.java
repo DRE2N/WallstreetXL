@@ -26,9 +26,11 @@ public class WCommandCache extends DRECommandCache {
 
     public AddItemCommand addItem = new AddItemCommand();
     public CreateCommand create = new CreateCommand();
+    public DeleteCommand delete = new DeleteCommand();
     public ExchangeCommand exchange = new ExchangeCommand();
     public HelpCommand help = new HelpCommand();
     public LinkCommand link = new LinkCommand();
+    public LogsCommand logs = new LogsCommand();
     public MainCommand main = new MainCommand();
     public OpenCommand open = new OpenCommand();
     public RemoveItemCommand removeItem = new RemoveItemCommand();
@@ -39,8 +41,10 @@ public class WCommandCache extends DRECommandCache {
         addCommand(addItem);
         addCommand(create);
         addCommand(exchange);
+        addCommand(delete);
         addCommand(help);
         addCommand(link);
+        addCommand(logs);
         addCommand(main);
         addCommand(open);
         addCommand(removeItem);
