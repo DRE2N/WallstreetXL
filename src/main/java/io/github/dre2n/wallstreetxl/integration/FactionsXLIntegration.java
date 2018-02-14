@@ -23,6 +23,7 @@ import io.github.dre2n.wallstreetxl.shop.PlayerShop;
 import io.github.dre2n.wallstreetxl.shop.Shop;
 import io.github.dre2n.wallstreetxl.shop.Trader;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -59,7 +60,7 @@ public class FactionsXLIntegration implements Listener {
     public void onPotionSplash(PotionSplashEvent event) {
         for (Entity entity : event.getAffectedEntities()) {
             if (Trader.isTrader(entity)) {
-                event.setIntensity(entity, 0);
+                event.setIntensity(((LivingEntity) entity), 0);
             }
         }
     }
