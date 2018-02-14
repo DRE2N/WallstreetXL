@@ -26,6 +26,7 @@ import io.github.dre2n.wallstreetxl.command.WCommandCache;
 import io.github.dre2n.wallstreetxl.config.WConfig;
 import io.github.dre2n.wallstreetxl.config.WMessage;
 import io.github.dre2n.wallstreetxl.currency.WCurrencyCache;
+import io.github.dre2n.wallstreetxl.integration.FactionsXLIntegration;
 import io.github.dre2n.wallstreetxl.shop.ShopCache;
 import io.github.dre2n.wallstreetxl.shop.Trader;
 import io.github.dre2n.wallstreetxl.util.PageGUICache;
@@ -98,6 +99,9 @@ public class WallstreetXL extends DREPlugin {
         loadShops();
         loadWCommands();
         manager.registerEvents(new Trader(), this);
+        if (manager.getPlugin("FactionsXL") != null) {
+            manager.registerEvents(new FactionsXLIntegration(), this);
+        }
     }
 
     public static WallstreetXL getInstance() {

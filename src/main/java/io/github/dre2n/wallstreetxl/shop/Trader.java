@@ -28,6 +28,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
 
 /**
@@ -87,6 +88,9 @@ public class Trader implements Listener {
         Shop shop = getShopByTrader(villager);
         if (shop instanceof PlayerShop) {
             shop.delete();
+            for (ShopItem item : shop.getItems()) {
+                villager.getWorld().dropItem(villager.getLocation(), item.getItem());
+            }
         }
         WallstreetXL.getInstance().getTraderCache().remove((Villager) villager);
     }

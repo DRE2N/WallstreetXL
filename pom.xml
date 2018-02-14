@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.github.dre2n</groupId>
     <artifactId>wallstreetxl</artifactId>
-    <version>0.2</version>
+    <version>0.2.1</version>
     <packaging>jar</packaging>
     <name>WallstreetXL</name>
     <url>https://dre2n.github.io</url>
@@ -77,6 +77,11 @@
             <groupId>io.github.dre2n</groupId>
             <artifactId>commons</artifactId>
             <version>3.1.4</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.dre2n</groupId>
+            <artifactId>factionsxl</artifactId>
+            <version>0.5-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.greatmancode</groupId>
