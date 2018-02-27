@@ -16,8 +16,8 @@
  */
 package io.github.dre2n.wallstreetxl.command;
 
-import io.github.dre2n.commons.command.DRECommandCache;
-import io.github.dre2n.commons.javaplugin.DREPlugin;
+import de.erethon.commons.command.DRECommandCache;
+import de.erethon.commons.javaplugin.DREPlugin;
 
 /**
  * @author Daniel Saukel

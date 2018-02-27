@@ -16,9 +16,9 @@
  */
 package io.github.dre2n.wallstreetxl.shop;
 
-import io.github.dre2n.commons.misc.FileUtil;
+import de.erethon.commons.misc.FileUtil;
 import io.github.dre2n.wallstreetxl.WallstreetXL;
-import io.github.dre2n.wallstreetxl.util.PageGUI;
+import de.erethon.commons.gui.PageGUI;
 import java.io.File;
 import java.util.HashSet;
 import java.util.Set;

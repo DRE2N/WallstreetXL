@@ -18,7 +18,7 @@ package io.github.dre2n.wallstreetxl.shop;
 
 import com.greatmancode.craftconomy3.Cause;
 import com.greatmancode.craftconomy3.account.Account;
-import io.github.dre2n.commons.chat.MessageUtil;
+import de.erethon.commons.chat.MessageUtil;
 import io.github.dre2n.wallstreetxl.WallstreetXL;
 import io.github.dre2n.wallstreetxl.config.WMessage;
 import io.github.dre2n.wallstreetxl.currency.WCurrency;

@@ -16,9 +16,9 @@
  */
 package io.github.dre2n.wallstreetxl.integration;
 
-import io.github.dre2n.factionsxl.FactionsXL;
-import io.github.dre2n.factionsxl.faction.Faction;
-import io.github.dre2n.factionsxl.protection.EntityProtectionListener;
+import de.erethon.factionsxl.FactionsXL;
+import de.erethon.factionsxl.faction.Faction;
+import de.erethon.factionsxl.protection.EntityProtectionListener;
 import io.github.dre2n.wallstreetxl.shop.PlayerShop;
 import io.github.dre2n.wallstreetxl.shop.Shop;
 import io.github.dre2n.wallstreetxl.shop.Trader;

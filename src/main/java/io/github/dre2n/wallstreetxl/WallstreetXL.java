@@ -18,10 +18,11 @@ package io.github.dre2n.wallstreetxl;
 
 import com.greatmancode.craftconomy3.Common;
 import com.greatmancode.craftconomy3.tools.interfaces.Loader;
-import io.github.dre2n.commons.compatibility.Internals;
-import io.github.dre2n.commons.config.MessageConfig;
-import io.github.dre2n.commons.javaplugin.DREPlugin;
-import io.github.dre2n.commons.javaplugin.DREPluginSettings;
+import de.erethon.commons.compatibility.Internals;
+import de.erethon.commons.config.MessageConfig;
+import de.erethon.commons.gui.PageGUICache;
+import de.erethon.commons.javaplugin.DREPlugin;
+import de.erethon.commons.javaplugin.DREPluginSettings;
 import io.github.dre2n.wallstreetxl.command.WCommandCache;
 import io.github.dre2n.wallstreetxl.config.WConfig;
 import io.github.dre2n.wallstreetxl.config.WMessage;
@@ -29,13 +30,11 @@ import io.github.dre2n.wallstreetxl.currency.WCurrencyCache;
 import io.github.dre2n.wallstreetxl.integration.FactionsXLIntegration;
 import io.github.dre2n.wallstreetxl.shop.ShopCache;
 import io.github.dre2n.wallstreetxl.shop.Trader;
-import io.github.dre2n.wallstreetxl.util.PageGUICache;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 import org.bukkit.entity.Villager;
-import org.bukkit.event.HandlerList;
 
 /**
  * @author Daniel Saukel
@@ -50,7 +49,6 @@ public class WallstreetXL extends DREPlugin {
     public static File PLAYER_SHOPS;
 
     private WConfig wConfig;
-    private MessageConfig messageConfig;
     private PageGUICache pageGUIs;
     private WCommandCache wCommands;
     private WCurrencyCache wCurrencies;
@@ -94,7 +92,6 @@ public class WallstreetXL extends DREPlugin {
         loadCraftConomy();
         loadWConfig();
         loadMessageConfig();
-        loadPageGUIs();
         loadCurrencies();
         loadShops();
         loadWCommands();
@@ -124,24 +121,8 @@ public class WallstreetXL extends DREPlugin {
         wConfig = new WConfig(new File(getDataFolder(), "config.yml"));
     }
 
-    public MessageConfig getMessageConfig() {
-        return messageConfig;
-    }
-
     public void loadMessageConfig() {
         messageConfig = new MessageConfig(WMessage.class, new File(getDataFolder(), "language.yml"));
-    }
-
-    public PageGUICache getPageGUICache() {
-        return pageGUIs;
-    }
-
-    public void loadPageGUIs() {
-        if (pageGUIs != null) {
-            HandlerList.unregisterAll(pageGUIs);
-        }
-        pageGUIs = new PageGUICache();
-        manager.registerEvents(pageGUIs, this);
     }
 
     @Override

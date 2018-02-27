@@ -16,9 +16,9 @@
  */
 package io.github.dre2n.wallstreetxl.command;
 
-import io.github.dre2n.commons.chat.MessageUtil;
-import io.github.dre2n.commons.command.DRECommand;
-import io.github.dre2n.commons.misc.NumberUtil;
+import de.erethon.commons.chat.MessageUtil;
+import de.erethon.commons.command.DRECommand;
+import de.erethon.commons.misc.NumberUtil;
 import io.github.dre2n.wallstreetxl.WallstreetXL;
 import io.github.dre2n.wallstreetxl.config.WMessage;
 import io.github.dre2n.wallstreetxl.currency.WCurrency;

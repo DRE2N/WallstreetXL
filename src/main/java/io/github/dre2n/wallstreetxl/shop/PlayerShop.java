@@ -16,10 +16,10 @@
  */
 package io.github.dre2n.wallstreetxl.shop;
 
-import io.github.dre2n.commons.misc.SimpleDateUtil;
-import io.github.dre2n.commons.player.PlayerUtil;
+import de.erethon.commons.misc.SimpleDateUtil;
+import de.erethon.commons.player.PlayerUtil;
 import io.github.dre2n.wallstreetxl.WallstreetXL;
-import io.github.dre2n.wallstreetxl.util.PageGUI;
+import de.erethon.commons.gui.PageGUI;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;

@@ -16,7 +16,7 @@
  */
 package io.github.dre2n.wallstreetxl.config;
 
-import io.github.dre2n.commons.config.DREConfig;
+import de.erethon.commons.config.DREConfig;
 import java.io.File;
 import java.util.Date;
 import java.util.HashMap;

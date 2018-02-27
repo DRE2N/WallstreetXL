@@ -16,9 +16,9 @@
  */
 package io.github.dre2n.wallstreetxl.config;
 
-import io.github.dre2n.commons.chat.MessageUtil;
-import io.github.dre2n.commons.config.Message;
-import io.github.dre2n.commons.javaplugin.DREPlugin;
+import de.erethon.commons.chat.MessageUtil;
+import de.erethon.commons.config.Message;
+import de.erethon.commons.javaplugin.DREPlugin;
 import io.github.dre2n.wallstreetxl.WallstreetXL;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
