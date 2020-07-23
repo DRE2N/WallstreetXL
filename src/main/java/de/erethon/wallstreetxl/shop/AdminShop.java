@@ -41,6 +41,7 @@ public class AdminShop extends Shop {
         items = ShopItem.deserializeList((List<Map<String, Object>>) config.getList("items"));
         gui = new PaginatedInventoryGUI(title);
         gui.setLayout(new PaginatedFlowInventoryLayout(gui, 54, PaginatedInventoryLayout.PaginationButtonPosition.BOTTOM));
+        gui.register();
         items.forEach(i -> gui.add(i.getButton()));
         Location location = (Location) config.get("traderLocation");
         if (location != null) {
@@ -62,6 +63,7 @@ public class AdminShop extends Shop {
         this.title = ChatColor.translateAlternateColorCodes('&', title);
         gui = new PaginatedInventoryGUI(this.title);
         gui.setLayout(new PaginatedFlowInventoryLayout(gui, 54, PaginatedInventoryLayout.PaginationButtonPosition.BOTTOM));
+        gui.register();
         save();
     }
 

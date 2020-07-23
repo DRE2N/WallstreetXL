@@ -55,6 +55,7 @@ public class PlayerShop extends Shop {
         items = ShopItem.deserializeList((List<Map<String, Object>>) config.getList("items"));
         gui = new PaginatedInventoryGUI(title);
         gui.setLayout(new PaginatedFlowInventoryLayout(gui, 54, PaginationButtonPosition.BOTTOM));
+        gui.register();
         items.forEach(i -> gui.add(i.getButton()));
         Location location = (Location) config.get("traderLocation");
         if (location != null) {
@@ -77,6 +78,7 @@ public class PlayerShop extends Shop {
         this.title = ChatColor.translateAlternateColorCodes('&', title);
         gui = new PaginatedInventoryGUI(this.title);
         gui.setLayout(new PaginatedFlowInventoryLayout(gui, 54, PaginationButtonPosition.BOTTOM));
+        gui.register();
         villager = Trader.createTrader(owner, owner.getLocation(), name);
         save();
     }
