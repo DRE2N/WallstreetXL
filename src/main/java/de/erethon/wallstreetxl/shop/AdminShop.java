@@ -17,6 +17,8 @@
 package de.erethon.wallstreetxl.shop;
 
 import de.erethon.vignette.api.PaginatedInventoryGUI;
+import de.erethon.vignette.api.layout.PaginatedFlowInventoryLayout;
+import de.erethon.vignette.api.layout.PaginatedInventoryLayout;
 import de.erethon.wallstreetxl.WallstreetXL;
 import java.io.File;
 import java.io.IOException;
@@ -38,6 +40,7 @@ public class AdminShop extends Shop {
         title = ChatColor.translateAlternateColorCodes('&', config.getString("title"));
         items = ShopItem.deserializeList((List<Map<String, Object>>) config.getList("items"));
         gui = new PaginatedInventoryGUI(title);
+        gui.setLayout(new PaginatedFlowInventoryLayout(gui, 54, PaginatedInventoryLayout.PaginationButtonPosition.BOTTOM));
         items.forEach(i -> gui.add(i.getButton()));
         Location location = (Location) config.get("traderLocation");
         if (location != null) {
@@ -58,6 +61,7 @@ public class AdminShop extends Shop {
         this.name = name;
         this.title = ChatColor.translateAlternateColorCodes('&', title);
         gui = new PaginatedInventoryGUI(this.title);
+        gui.setLayout(new PaginatedFlowInventoryLayout(gui, 54, PaginatedInventoryLayout.PaginationButtonPosition.BOTTOM));
         save();
     }
 
