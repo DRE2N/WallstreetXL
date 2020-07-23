@@ -1,5 +1,5 @@
 name: WallstreetXL
-main: io.github.dre2n.wallstreetxl.WallstreetXL
+main: de.erethon.wallstreetxl.WallstreetXL
 version: ${project.version}${buildNo}
 author: Daniel Saukel
 description: ${project.description}

@@ -1,0 +1,46 @@
+cmd: 
+  addItem: 
+    success: "&4&v1 &7wurde &4&v2 &7erfolgreich hinzugefügt."
+  create: 
+    success: "&7Der Shop &4&v1 &7wurde erfolgreich erstellt."
+  delete: 
+    success: "&7Der Shop &4&v1 &7wurde erfolgreich entfernt."
+  exchange: 
+    success: "&4&v1 &7wurde erfolgreich mit &4&v2 &7ausgetauscht."
+  main: 
+    help: "&7Gebe &o/ws help&r &7für weitere Hilfe ein."
+    welcome: "&7Willkommen zu &4Wallstreet&fXL"
+  reload: 
+    success: "&7WXL wurde erfolgreich neu geladen."
+  removeItem: 
+    success: "&4&v1 &7wurde erfolgreich aus &4&v2 &7entfernt."
+error: 
+  indexEmpty: "&4Es gibt kein Item an dieser Index-Nummer."
+  noItemInHand: "&4Du hast kein Item in der Hand."
+  noSuch: 
+    currency: "&4Die Währung &7&v1 &4ist nicht registriert."
+    shop: "&4Der Shop &7&v1 &4existiert nicht."
+  notEnough: "&7&v1 &4hat keine &7&v2&4."
+  shopExists: "&4Der Shop &7&v1 &4existiert bereits."
+help: 
+  addItem: "/ws addItem [Shop] [buy|sell] [Währung] [Preis] - Fügt die Ware in Deiner Hand dem Shop hinzu."
+  create: "/ws create [Name] ([Titel])- Erstellt einen neuen Shop."
+  delete: "/ws delete [Shop] - Entfernt einen existierenden Shop."
+  exchange: "/ws exchange [Anzahl] [alte Währung] [neue Währung] - Tauscht eine Währung mit einer neuen aus."
+  help: "/ws help [Seite] - Zeigt die jeweilige Hilfeseite."
+  link: "/ws link [Shop] - Erstellt einen Händler für einen existierenden Shop."
+  logs: "/ws logs [Shop] - Zeigt die Handels-Logs eines Spieler-Shops."
+  main: "/ws - Grundlegende Statusinformationen."
+  open: "/ws open [Name] - Öffnet einen Shop."
+  reload: "/ws reload - Lädt die Einstellungen und Shops neu."
+  removeItem: "/ws remove [Shop] [Index] - Entfernt eine Ware aus dem Shop."
+  trader: "/ws trader [Name] ([Titel])- Erstellt einen neuen Spieler-Shop mit Händler."
+nextPage: "&6&lNÄCHSTE SEITE"
+previousPage: "&6&lLETZTE SEITE"
+shop: 
+  bough: "&7Du hast &4&v1 &7für &4&v2 &7gekauft."
+  buy: "&4Zum Kaufen klicken"
+  sell: "&aZum Verkaufen klicken"
+  sold: "&7Du hast &4&v1 &7für &4&v2 &7verkauft."
+trader: 
+  name: "&1&l[Händler] &6&v1"

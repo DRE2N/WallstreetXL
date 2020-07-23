@@ -1,0 +1,46 @@
+cmd: 
+  addItem: 
+    success: "&7Successfully added &4&v1 &7to &4&v2&7."
+  create: 
+    success: "&7Successfully created the shop &4&v1&7."
+  delete: 
+    success: "&7Successfully removed the shop &4&v1&7."
+  exchange: 
+    success: "&7Successfully exchanged &4&v1 &7for &4&v2&7."
+  main: 
+    help: "&7Type in &o/ws help&r &7for further information."
+    welcome: "&7Welcome to &4Wallstreet&fXL"
+  reload: 
+    success: "&7Successfully reloaded WXL."
+  removeItem: 
+    success: "&7Successfully removed &4&v1 &7from &4&v2&7."
+error: 
+  indexEmpty: "&4There is no item at this index number."
+  noItemInHand: "&4You do not have an item in your hand."
+  noSuch: 
+    currency: "&4The currency &7&v1 &4is not registered."
+    shop: "&4The shop &7&v1 &4does not exist."
+  notEnough: "&7&v1 &4does not have &7&v2&4."
+  shopExists: "&4The shop &7&v1 &4already exists."
+help: 
+  addItem: "/ws addItem [shop] [buy|sell] [currency] [price] - Adds the good in your hand to the shop."
+  create: "/ws create [name] ([title])- Creates a new player or admin shop."
+  delete: "/ws delete [shop] - Deletes an existing shop."
+  exchange: "/ws exchange [amount] [old currency] [new currency] - Exchanges a currency for a new one."
+  help: "/ws help [page] - Shows the help page."
+  link: "/ws link [shop] - Creates a trader for an existing shop."
+  logs: "/ws logs [shop] - Shows the trade logs of a player shop."
+  main: "/ws - General status information."
+  open: "/ws open [Name] - Opens a shop."
+  reload: "/ws reload - Reloads the config and all shops."
+  removeItem: "/ws remove [shop] [index] - Removes a good from the shop."
+  trader: "/ws trader [name] ([title])- Creates a new player shop with a trader."
+nextPage: "&6&lNEXT PAGE"
+previousPage: "&6&lPREVIOUS PAGE"
+shop: 
+  bough: "&7You bought &4&v1 &7for &4&v2&7."
+  buy: "&4Click to buy"
+  sell: "&aClick to sell"
+  sold: "&7You sold &4&v1 &7for &4&v2&7."
+trader: 
+  name: "&1&l[Trader] &6&v1"
